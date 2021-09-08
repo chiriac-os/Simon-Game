@@ -6,8 +6,8 @@ var userClickedPattern = []; // Saves the user clicked color pattern.
 var started = false; // The game just start once.
 var level = 0; 
 
-// When any key is pressed, call nextSequence() function.
-$(document).keypress(function(){
+// When the start button is clicked, call nextSequence() function.
+$('.start-button').click(function(){
     if(!started) {
         nextSequence();
         started = true;
@@ -49,7 +49,7 @@ function checkAnswer(currentLevel) {
             $('body').removeClass('game-over');
         }, 200);
 
-        $('#level-title').text('Game Over, Press Any Key to Restart'); // Changes the level title.
+        $('#level-title').text('Game Over, Press Start to play again'); // Changes the level title.
         
         // Call the restart function.
         startOver();
@@ -72,7 +72,7 @@ function nextSequence() {
 
     // When the game stars, changes <h1> to Level 0. Each time the function is called, the level will increse by 1.
     for (level; level < gamePattern.length; level++) {
-        $('#level-title').text('level ' + level )
+        $('#level-title').text('Level ' + level )
     }
 
     // Makes the flash animation

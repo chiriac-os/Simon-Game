@@ -1,8 +1,21 @@
+/* BODY */
 body {
   text-align: center;
   background-color: #011F3F;
 }
 
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.container {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
+/* TITLE */
 #level-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
@@ -10,13 +23,7 @@ body {
   color: #FEF2BF;
 }
 
-.container {
-  display: block;
-  width: 50%;
-  margin: auto;
-
-}
-
+/* BUTTONS */
 .btn {
   margin: 25px;
   display: inline-block;
@@ -26,9 +33,16 @@ body {
   border-radius: 20%;
 }
 
-.game-over {
-  background-color: red;
-  opacity: 0.8;
+.start-button {
+  background-color: #FEF2BF;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  margin: 25px;
+  display: inline-block;
+  height: 100px;
+  width: 300px;
+  border: 10px solid black;
+  border-radius: 15%;
 }
 
 .red {
@@ -52,6 +66,26 @@ body {
   background-color: grey;
 }
 
+/* INSTRUCTIONS */
+.how-to-play-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  margin:  5%;
+  color: #FEF2BF;
+}
+
+.instruction-list {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  margin:  5%;
+  color: #FEF2BF;
+}
+
+.instruction-list-item {
+  margin-bottom: 1%;
+}
+
+/* @MEDIA */
 @media screen and (max-width: 1024px) {
 
   .container {
