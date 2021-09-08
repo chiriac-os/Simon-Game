@@ -9,3 +9,5 @@ Instructions for playing:
 1. Press any key on the keyboard.
 2. Click with the mouse on the sequence without making a mistake.
 3. If you make a mistake, go back to step 1 to restart the game.
+
+This game is designed to be used with a keyboard. It will probably not work on mobile devices.
