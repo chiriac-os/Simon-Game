@@ -87,22 +87,32 @@ body {
 
 /* @MEDIA */
 @media screen and (max-width: 1024px) {
-
-  .container {
-    
+  .container { 
     width: 100%;
     margin: auto;
-
   }
+
+  .instruction-list-item {
+    margin-bottom: 3%;
+  } 
 }
 
 @media screen and (max-width: 560px){
   .btn {
-    margin: 25px;
-    display: inline-block;
     height: 100px;
     width: 100px;
-    border: 5px solid black;
-
   }
+
+  .how-to-play-title {
+    font-size: 1.5rem;
+  }
+
+  .instruction-list {
+    font-size: 0.75rem;
+  }
+
+  .instruction-list-item {
+    margin-bottom: 5%;
+  }
+
 }
