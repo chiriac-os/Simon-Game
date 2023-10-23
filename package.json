@@ -1,7 +1,9 @@
 {
   "name": "simon-game",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "description": "Simon says game with React",
+  "homepage": "https://chiriac-os.github.io/Simon-Game/",
   "type": "module",
   "scripts": {
     "dev": "vite",
