@@ -6,11 +6,12 @@ function Game() {
      */
     const [started, setStarted] = useState(false);
     const [gameover, setGameover] = useState(false);
-    const [level, setLevel] = useState(0);
+    const [gamePattern, setGamePattern] = useState([]);
 
     /**
      * Refs
      */
+    const level = useRef(0)
     const red = useRef(null);
     const blue = useRef(null);
     const green = useRef(null);
@@ -21,7 +22,6 @@ function Game() {
      */
     const btnRefs = [red, blue, green, yellow];
     const buttonColors = ['red', 'blue', 'green', 'yellow'];
-    let gamePattern = []; // Saves the last color everytime
     let userClickedPattern = []; // Saves the user clicked color pattern
 
     /**
@@ -32,6 +32,7 @@ function Game() {
             nextSequence();
             setStarted(true);
         }
+        if (gameover) setGameover(false);
     }
 
 
@@ -40,8 +41,8 @@ function Game() {
      */
     const startOver = () => {
         setStarted(false);
-        setLevel(0);
-        gamePattern = []
+        setGamePattern([]);
+        level.current = 0;
     }
 
     /**
@@ -59,7 +60,6 @@ function Game() {
             playSound(userChosenColor);
             animatePress(userChosenColor);
 
-            console.log(userChosenColor)
             // Check game pattern
             checkAnswer(userClickedPattern.length - 1);
         }
@@ -70,7 +70,7 @@ function Game() {
      */
     const nextSequence = () => {
         // Increase level
-        setLevel(level + 1);
+        level.current++;
 
         // Reset the array for the next level
         userClickedPattern = [];
@@ -78,10 +78,8 @@ function Game() {
         // Generates the random number and a random color everytime
         let randomNumber = Math.floor(Math.random() * 4);
         let randomChosenColor = buttonColors[randomNumber];
-        console.log("random color", randomChosenColor);
-        gamePattern.push(randomChosenColor);
-        console.log("game pattern", gamePattern);
-
+        setGamePattern([...gamePattern, randomChosenColor]);
+        
         // Makes the flash animation
         btnRefs.forEach(btnRef => {
             if (btnRef.current.id === randomChosenColor) {
@@ -103,9 +101,6 @@ function Game() {
      * @param {number} currentLevel 
      */
     const checkAnswer = (currentLevel) => {
-        console.log(gamePattern[currentLevel] === userClickedPattern[currentLevel])
-        console.log("game", gamePattern);
-        console.log("user", userClickedPattern);
         // If the last push in the 'gamePattern' and in the 'userClickedPattern' are the same, will continue
         if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
             console.log("Success!");
@@ -114,7 +109,7 @@ function Game() {
             if (gamePattern.length === userClickedPattern.length) {
                 setTimeout(() => {
                     nextSequence();
-                }, 100);
+                }, 1000);
 
                 clearTimeout();
             }
@@ -174,7 +169,7 @@ function Game() {
         <>
             <h1 id="level-title">{
                 !gameover ? (
-                    !started ? ("Press Start") : ("Level " + level)
+                    !started ? ("Press Start") : ("Level " + level.current)
                 ) : ("Game Over, Press Start to play again")
             }</h1>
 
