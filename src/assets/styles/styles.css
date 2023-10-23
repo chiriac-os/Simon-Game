@@ -24,6 +24,10 @@ body {
 }
 
 /* BUTTONS */
+button {
+  cursor: pointer;
+}
+
 .btn {
   margin: 25px;
   display: inline-block;
@@ -40,7 +44,8 @@ body {
   margin: 25px;
   display: inline-block;
   height: 100px;
-  width: 300px;
+  width: auto;
+  padding: 0 25px;
   border: 10px solid black;
   border-radius: 15%;
 }
@@ -83,6 +88,15 @@ body {
 
 .instruction-list-item {
   margin-bottom: 1%;
+}
+
+.fade-in-out {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.fade-in-out.show {
+  opacity: 1;
 }
 
 /* @MEDIA */

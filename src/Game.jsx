@@ -1,21 +1,204 @@
+import { useState, useRef } from "react";
+
 function Game() {
+    /**
+     * State
+     */
+    const [started, setStarted] = useState(false);
+    const [gameover, setGameover] = useState(false);
+    const [level, setLevel] = useState(0);
+
+    /**
+     * Refs
+     */
+    const red = useRef(null);
+    const blue = useRef(null);
+    const green = useRef(null);
+    const yellow = useRef(null);
+
+    /**
+     * Game variables
+     */
+    const btnRefs = [red, blue, green, yellow];
+    const buttonColors = ['red', 'blue', 'green', 'yellow'];
+    let gamePattern = []; // Saves the last color everytime
+    let userClickedPattern = []; // Saves the user clicked color pattern
+
+    /**
+     * Starts the game
+     */
+    const handleStart = () => {
+        if (!started) {
+            nextSequence();
+            setStarted(true);
+        }
+    }
+
+
+    /**
+     * Start over function restarts the values
+     */
+    const startOver = () => {
+        setStarted(false);
+        setLevel(0);
+        gamePattern = []
+    }
+
+    /**
+     * Handles click event over the colors
+     * @param {MouseEvent} event 
+     */
+    const handleBtn = (event) => {
+        // Do something only if the game has started
+        if (started) {
+            // Get user's choise and pushed in the user pattern 
+            const userChosenColor = event.target.id;
+            userClickedPattern.push(userChosenColor);
+
+            // Call linked audio and animation for the user clicked color
+            playSound(userChosenColor);
+            animatePress(userChosenColor);
+
+            console.log(userChosenColor)
+            // Check game pattern
+            checkAnswer(userClickedPattern.length - 1);
+        }
+    }
+
+    /**
+     * Manages the level
+     */
+    const nextSequence = () => {
+        // Increase level
+        setLevel(level + 1);
+
+        // Reset the array for the next level
+        userClickedPattern = [];
+
+        // Generates the random number and a random color everytime
+        let randomNumber = Math.floor(Math.random() * 4);
+        let randomChosenColor = buttonColors[randomNumber];
+        console.log("random color", randomChosenColor);
+        gamePattern.push(randomChosenColor);
+        console.log("game pattern", gamePattern);
+
+        // Makes the flash animation
+        btnRefs.forEach(btnRef => {
+            if (btnRef.current.id === randomChosenColor) {
+                btnRef.current.classList.remove("show");
+                setTimeout(() => {
+                    btnRef.current.classList.add("show");
+                }, 100);
+
+                clearTimeout();
+            }
+        });
+
+        // Linked with the play audio function for the random color
+        playSound(randomChosenColor);
+    }
+
+    /**
+     * Check if the given answer is correct, otherwise handles gameover
+     * @param {number} currentLevel 
+     */
+    const checkAnswer = (currentLevel) => {
+        console.log(gamePattern[currentLevel] === userClickedPattern[currentLevel])
+        console.log("game", gamePattern);
+        console.log("user", userClickedPattern);
+        // If the last push in the 'gamePattern' and in the 'userClickedPattern' are the same, will continue
+        if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+            console.log("Success!");
+
+            // If both length are correct, will continue the game with a new random color
+            if (gamePattern.length === userClickedPattern.length) {
+                setTimeout(() => {
+                    nextSequence();
+                }, 100);
+
+                clearTimeout();
+            }
+        } else {
+            console.log("Wrong!");
+
+            // Play the "wrong" audio
+            const audio = new Audio("./src/assets/sounds/wrong.mp3");
+            audio.play();
+
+            // Set gameover state
+            setGameover(true);
+
+            // Adds to the body a red background for 200ms
+            const body = document.body;
+            body.classList.add("game-over");
+            setTimeout(() => {
+                body.classList.remove("game-over");
+            }, 200);
+
+            clearTimeout();
+
+            // Call restart function
+            startOver();
+        }
+    }
+
+    /**
+     * Plays the correspondent sound
+     * @param {string} color 
+     */
+    const playSound = (color) => {
+        // Chooses the right Audio file for each color
+        const audio = new Audio('./src/assets/sounds/' + color + '.mp3');
+        audio.play();
+    }
+
+    /**
+     * Animate clicked color
+     * @param {string} color 
+     */
+    const animatePress = (color) => {
+        // Add visual effect
+        btnRefs.forEach(btnRef => {
+            if (btnRef.current.id === color) {
+                btnRef.current.classList.add("pressed");
+                setTimeout(() => {
+                    btnRef.current.classList.remove("pressed");
+                }, 100);
+
+                clearTimeout();
+            }
+        });
+    }
+
     return (
         <>
-            <h1 id="level-title">Press Start</h1>
+            <h1 id="level-title">{
+                !gameover ? (
+                    !started ? ("Press Start") : ("Level " + level)
+                ) : ("Game Over, Press Start to play again")
+            }</h1>
+
             <div className="container">
                 <div className="row">
-                    <div type="button" id="green" className="btn green"></div>
-                    <div type="button" id="red" className="btn red"></div>
+                    <div type="button" ref={green} id="green" className="btn green fade-in-out show" onClick={handleBtn}></div>
+                    <div type="button" ref={red} id="red" className="btn red fade-in-out show" onClick={handleBtn}></div>
                 </div>
 
                 <div className="row">
-                    <div type="button" id="yellow" className="btn yellow"></div>
-                    <div type="button" id="blue" className="btn blue"></div>
+                    <div type="button" ref={yellow} id="yellow" className="btn yellow fade-in-out show" onClick={handleBtn}></div>
+                    <div type="button" ref={blue} id="blue" className="btn blue fade-in-out show" onClick={handleBtn}></div>
                 </div>
             </div>
 
             <div className="row">
-                <button className="start-button" type="button" value="Start">Start</button>
+                {!started || !gameover ? (
+                    /* START GAME */
+                    <button className="start-button" type="button" value="Start" onClick={handleStart}>
+                        Start
+                    </button>
+                ) : (<>
+                    {/* Hide button */}
+                </>)}
             </div>
 
             <div className="instructions">
@@ -28,7 +211,7 @@ function Game() {
                 </ol>
             </div>
         </>
-    )
+    );
 }
 
 export default Game;
