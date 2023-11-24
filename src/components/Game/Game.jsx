@@ -1,17 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 
-function Game() {
+/**
+ * Renders the game component
+ * @param {GameProps} param0 
+ * @returns {JSX.Element}
+ */
+function Game({ game, setGame, nextLevel, resetLevel }) {
     /**
-     * State
+     * Hooks
      */
-    const [started, setStarted] = useState(false);
-    const [gameover, setGameover] = useState(false);
     const [gamePattern, setGamePattern] = useState([]);
-
-    /**
-     * Refs
-     */
-    const level = useRef(0)
     const red = useRef(null);
     const blue = useRef(null);
     const green = useRef(null);
@@ -25,16 +23,39 @@ function Game() {
     let userClickedPattern = []; // Saves the user clicked color pattern
 
     /**
+     * State manager
+     * Set the started game state
+     * @param {boolean} prop 
+     */
+    const setStarted = (prop) => {
+        setGame((prev) => ({
+            ...prev,
+            started: prop,
+        }))
+    }
+
+    /**
+     * State manager
+     * Set the gameover state
+     * @param {boolean} prop 
+     */
+    const setGameover = (prop) => {
+        setGame((prev) => ({
+            ...prev,
+            over: prop,
+        }))
+    }
+
+    /**
      * Starts the game
      */
     const handleStart = () => {
-        if (!started) {
+        if (!game.started) {
             nextSequence();
             setStarted(true);
         }
-        if (gameover) setGameover(false);
+        if (game.over) setGameover(false);
     }
-
 
     /**
      * Start over function restarts the values
@@ -42,7 +63,7 @@ function Game() {
     const startOver = () => {
         setStarted(false);
         setGamePattern([]);
-        level.current = 0;
+        resetLevel();
     }
 
     /**
@@ -51,18 +72,20 @@ function Game() {
      */
     const handleBtn = (event) => {
         // Do something only if the game has started
-        if (started) {
-            // Get user's choise and pushed in the user pattern 
-            const userChosenColor = event.target.id;
-            userClickedPattern.push(userChosenColor);
+        if (!game.started) return
 
-            // Call linked audio and animation for the user clicked color
-            playSound(userChosenColor);
-            animatePress(userChosenColor);
 
-            // Check game pattern
-            checkAnswer(userClickedPattern.length - 1);
-        }
+        // Get user's choise and pushed in the user pattern 
+        const userChosenColor = event.target.id;
+        userClickedPattern.push(userChosenColor);
+
+        // Call linked audio and animation for the user clicked color
+        playSound(userChosenColor);
+        animatePress(userChosenColor);
+
+        // Check game pattern
+        checkAnswer(userClickedPattern.length - 1);
+
     }
 
     /**
@@ -70,7 +93,7 @@ function Game() {
      */
     const nextSequence = () => {
         // Increase level
-        level.current++;
+        nextLevel();
 
         // Reset the array for the next level
         userClickedPattern = [];
@@ -79,7 +102,7 @@ function Game() {
         let randomNumber = Math.floor(Math.random() * 4);
         let randomChosenColor = buttonColors[randomNumber];
         setGamePattern([...gamePattern, randomChosenColor]);
-        
+
         // Makes the flash animation
         btnRefs.forEach(btnRef => {
             if (btnRef.current.id === randomChosenColor) {
@@ -167,12 +190,6 @@ function Game() {
 
     return (
         <>
-            <h1 id="level-title">{
-                !gameover ? (
-                    !started ? ("Press Start") : ("Level " + level.current)
-                ) : ("Game Over, Press Start to play again")
-            }</h1>
-
             <div className="container">
                 <div className="row">
                     <div type="button" ref={green} id="green" className="btn green fade-in-out show" onClick={handleBtn}></div>
@@ -186,7 +203,7 @@ function Game() {
             </div>
 
             <div className="row">
-                {!started || !gameover ? (
+                {!game.started || !game.over ? (
                     /* START GAME */
                     <button className="start-button" type="button" value="Start" onClick={handleStart}>
                         Start
@@ -195,18 +212,8 @@ function Game() {
                     {/* Hide button */}
                 </>)}
             </div>
-
-            <div className="instructions">
-                <h2 className="how-to-play-title">How to play</h2>
-                <ol className="instruction-list">
-                    <li className="instruction-list-item">Press the Start button to play.</li>
-                    <li className="instruction-list-item">Click with the mouse on the highlighted colour.</li>
-                    <li className="instruction-list-item">If it is correct, you get another colour. Remember the sequence and reproduce it again in each level.</li>
-                    <li className="instruction-list-item">If you make a mistake, go back to step 1 to restart the game.</li>
-                </ol>
-            </div>
         </>
-    );
+    )
 }
 
 export default Game;
