@@ -1,0 +1,42 @@
+/* INSTRUCTIONS */
+.how-to-play-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    margin: 5%;
+    color: #FEF2BF;
+}
+
+.instruction-list {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    line-height: 1.6em;
+    margin: 5%;
+    color: #FEF2BF;
+    list-style: none;
+}
+
+.instruction-list-item {
+    margin-bottom: 25px;
+}
+
+/* @MEDIA */
+@media screen and (max-width: 1024px) {
+    .instruction-list-item {
+        margin-bottom: 3%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .how-to-play-title {
+        font-size: 1.5rem;
+    }
+
+    .instruction-list {
+        font-size: 0.75rem;
+    }
+
+    .instruction-list-item {
+        margin-bottom: 5%;
+    }
+
+}

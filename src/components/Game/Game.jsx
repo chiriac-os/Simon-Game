@@ -1,3 +1,4 @@
+import "./Game.css";
 import { useState, useRef } from 'react';
 
 /**

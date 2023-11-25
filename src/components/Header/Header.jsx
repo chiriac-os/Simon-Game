@@ -1,3 +1,5 @@
+import "./Header.css";
+
 /**
  * App header 
  * Displays the header of the app, with the title, the info button, level and gameover message
@@ -65,7 +67,7 @@ function GameHeader({ game, setShowGame, getLevel }) {
 function InfoHeader({ setShowGame }) {
     return (
         <>
-            <h1 id="level-title">How to play?</h1>
+            <h1 id="level-title">Never played Simon?</h1>
 
             <div className="close" onClick={() => setShowGame(true)}>
                 <p>x</p>

@@ -1,0 +1,42 @@
+/* TITLE */
+#level-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3rem;
+    margin: 5%;
+    color: #FEF2BF;
+}
+
+#level-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    margin: 5%;
+    color: #FEF2BF;
+}
+
+/* INFO */
+.info {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    padding: 5px;
+    border: solid 8px #FEF2BF;
+    cursor: pointer;
+}
+
+.info > p {
+    font-size: 2rem;
+    margin: 5%;
+}
+
+.close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.close > p {
+    font-size: 3rem;
+    margin: 5%;
+}
