@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.7",
   "description": "Simon says game with React",
-  "homepage": "https://chiriac-os.github.io/Simon-Game/",
+  "homepage": "https://chiriac-os.github.io/simon-game/",
   "type": "module",
   "scripts": {
     "start": "npm run dev",
