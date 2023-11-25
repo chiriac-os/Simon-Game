@@ -204,14 +204,21 @@ function Game({ game, setGame, nextLevel, resetLevel }) {
             </div>
 
             <div className="row">
-                {!game.started || !game.over ? (
-                    /* START GAME */
-                    <button className="start-button" type="button" value="Start" onClick={handleStart}>
-                        Start
-                    </button>
-                ) : (<>
-                    {/* Hide button */}
-                </>)}
+                {!game.started ? (
+                    <>
+                        {/* Start Game */}
+                        <button className="start-button" type="button" value="Start" onClick={handleStart}>
+                            Start
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {/* Restart Game */}
+                        <button className="start-button" type="button" value="Start" onClick={startOver}>
+                            Restart
+                        </button>
+                    </>
+                )}
             </div>
         </>
     )

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useMemo } from "react";
 
 import Header from "./components/Header/Header";
 import Game from "./components/Game/Game";
@@ -17,28 +17,28 @@ function Root() {
         started: false,
         over: false,
     })
-    const level = useRef(0);
+    const [level, setLevel] = useState(0);
 
     /**
      * Level getter
      * @returns {number}
      */
-    const getLevel = () => {
-        return level.current;
-    }
+    const getLevel = useMemo(() => {
+        return level;
+    }, [level]);
 
     /**
      * Increments the level
      */
     const nextLevel = () => {
-        level.current++;
+        setLevel((prev) => prev + 1);
     }
 
     /**
      * Sets the level to 0
      */
     const resetLevel = () => {
-        level.current = 0;
+        setLevel(0);
     }
 
     const headerProps = { game, setGame, getLevel }

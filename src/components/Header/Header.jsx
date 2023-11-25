@@ -43,7 +43,7 @@ function GameHeader({ game, setShowGame, getLevel }) {
         <>
             <h1 id="level-title">{
                 !game.over ?
-                    (!game.started ? ("Press Start") : ("Level " + getLevel().valueOf()))
+                    (!game.started ? ("Press Start") : ("Level " + getLevel))
                     :
                     ("Game Over")
             }</h1>
