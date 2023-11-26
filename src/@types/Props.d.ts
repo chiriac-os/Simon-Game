@@ -3,19 +3,19 @@ import { GameState } from "./State";
 /**
  * HEADERS
  */
-type HeaderProps = {
+export type HeaderProps = {
     game: GameState,
     setGame: React.Dispatch<React.SetStateAction<GameState>>,
     getLevel: () => number,
 };
 
-type GameHeaderProps = {
+export type GameHeaderProps = {
     game: GameState,
     setShowGame: (prop: boolean) => React.Dispatch<React.SetStateAction<GameState>>,
     getLevel: () => number,
 };
 
-type InfoHeaderProps = {
+export type InfoHeaderProps = {
     game: GameState,
     setShowGame: (prop: boolean) => React.Dispatch<React.SetStateAction<GameState>>,
 };
@@ -23,7 +23,7 @@ type InfoHeaderProps = {
 /**
  * GAME
  */
-type GameProps = {
+export type GameProps = {
     game: GameState,
     setGame: React.Dispatch<React.SetStateAction<GameState>>,
     getLevel: () => number,

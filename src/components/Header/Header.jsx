@@ -1,12 +1,23 @@
+// eslint-disable-next-line no-unused-vars
+import { HeaderProps, GameHeaderProps, InfoHeaderProps } from "../../@types/Props";
 import "./Header.css";
 
 /**
  * App header 
  * Displays the header of the app, with the title, the info button, level and gameover message
- * @param {HeaderProps} param0 
+ * @param {HeaderProps} props 
  * @returns {JSX.Element}
  */
-function Header({ game, setGame, getLevel }) {
+function Header(props) {
+    /**
+     * Props
+     */
+    const { game, setGame, getLevel } = props;
+
+    /**
+     * Handle show game state
+     * @param {boolean} prop 
+     */
     const setShowGame = (prop) => {
         setGame((prev) => ({
             ...prev,
@@ -35,10 +46,15 @@ function Header({ game, setGame, getLevel }) {
 
 /**
  * Renders the game header
- * @param {GameHeaderProps} param0 
+ * @param {GameHeaderProps} props 
  * @returns {JSX.Element}
  */
-function GameHeader({ game, setShowGame, getLevel }) {
+function GameHeader(props) {
+    /**
+     * Props
+     */
+    const { game, setShowGame, getLevel } = props;
+
     return (
         <>
             <h1 id="level-title">{
@@ -61,10 +77,15 @@ function GameHeader({ game, setShowGame, getLevel }) {
 
 /**
  * Renders the info header
- * @param {InfoHeaderProps} param0 
+ * @param {InfoHeaderProps} props 
  * @returns {JSX.Element}
  */
-function InfoHeader({ setShowGame }) {
+function InfoHeader(props) {
+    /**
+     * Props
+     */
+    const { setShowGame } = props;
+
     return (
         <>
             <h1 id="level-title">Never played Simon?</h1>

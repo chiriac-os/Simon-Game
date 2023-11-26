@@ -1,8 +1,8 @@
 import "./Info.css";
 
 /**
- * 
- * @returns 
+ * Renders the info component
+ * @returns {JSX.Element}
  */
 function Info() {
     return (

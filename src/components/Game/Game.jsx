@@ -3,10 +3,15 @@ import { useState, useRef } from 'react';
 
 /**
  * Renders the game component
- * @param {GameProps} param0 
+ * @param {GameProps} props
  * @returns {JSX.Element}
  */
-function Game({ game, setGame, nextLevel, resetLevel }) {
+function Game(props) {
+    /**
+     * Props
+     */
+    const { game, setGame, nextLevel, resetLevel } = props;
+
     /**
      * Hooks
      */
