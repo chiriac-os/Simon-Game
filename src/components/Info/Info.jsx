@@ -1,20 +1,30 @@
-import "./Info.css";
+import { View, Text, FlatList } from 'react-native';
 
+const styles = {}
 /**
  * Renders the info component
  * @returns {JSX.Element}
  */
 function Info() {
+    const instructions = [
+        "Press the Start button to play.",
+        "Click with the mouse on the highlighted colour.",
+        "If it is correct, you get another colour. Remember the sequence and reproduce it again in each level.",
+        "If you make a mistake, go back to step 1 to restart the game."
+    ]
+
     return (
-        <div className="instructions">
-            <h2 className="how-to-play-title">How to play</h2>
-            <ul className="instruction-list">
-                <li className="instruction-list-item">Press the Start button to play.</li>
-                <li className="instruction-list-item">Click with the mouse on the highlighted colour.</li>
-                <li className="instruction-list-item">If it is correct, you get another colour. Remember the sequence and reproduce it again in each level.</li>
-                <li className="instruction-list-item">If you make a mistake, go back to step 1 to restart the game.</li>
-            </ul>
-        </div>
+        <View className="instructions">
+            <Text style={styles.how_to_play_title}>How to play</Text>
+            <FlatList
+                data={instructions}
+                renderItem={({ item }) => (
+                    <Text style={styles.instruction_list_item}>{item}</Text>
+                )}
+                keyExtractor={(item, index) => index.toString()}
+                style={styles.instruction_list}
+            />
+        </View>
     )
 }
 

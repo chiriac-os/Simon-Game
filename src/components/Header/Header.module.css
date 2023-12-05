@@ -1,12 +1,12 @@
 /* TITLE */
-#level-title {
+.level_title {
     font-family: 'Press Start 2P', cursive;
     font-size: 3rem;
     margin: 5%;
     color: #FEF2BF;
 }
 
-#level-subtitle {
+.level_subtitle {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.5rem;
     margin: 5%;
@@ -23,7 +23,7 @@
     cursor: pointer;
 }
 
-.info > p {
+.info_text {
     font-size: 2rem;
     margin: 5%;
 }
@@ -36,7 +36,7 @@
     cursor: pointer;
 }
 
-.close > p {
+.close_text {
     font-size: 3rem;
     margin: 5%;
 }

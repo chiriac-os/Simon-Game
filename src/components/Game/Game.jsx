@@ -1,17 +1,14 @@
-import "./Game.css";
-import { useState, useRef } from 'react';
+//import "./Game.css";
+import { useState, useRef, useCallback } from 'react';
+import { View, Button, TouchableHighlight } from 'react-native';
+const styles = {};
 
 /**
  * Renders the game component
- * @param {GameProps} props
+ * @param {*} props
  * @returns {JSX.Element}
  */
-function Game(props) {
-    /**
-     * Props
-     */
-    const { game, setGame, nextLevel, resetLevel } = props;
-
+function Game({ game, setGame, nextLevel, resetLevel }) {
     /**
      * Hooks
      */
@@ -33,24 +30,24 @@ function Game(props) {
      * Set the started game state
      * @param {boolean} prop 
      */
-    const setStarted = (prop) => {
+    const setStarted = useCallback((prop) => {
         setGame((prev) => ({
             ...prev,
             started: prop,
         }))
-    }
+    }, [game.started])
 
     /**
      * State manager
      * Set the gameover state
      * @param {boolean} prop 
      */
-    const setGameover = (prop) => {
+    const setGameover = useCallback((prop) => {
         setGame((prev) => ({
             ...prev,
             over: prop,
         }))
-    }
+    }, [game.over])
 
     /**
      * Starts the game
@@ -196,35 +193,35 @@ function Game(props) {
 
     return (
         <>
-            <div className="container">
-                <div className="row">
-                    <div type="button" ref={green} id="green" className="btn green fade-in-out show" onClick={handleBtn}></div>
-                    <div type="button" ref={red} id="red" className="btn red fade-in-out show" onClick={handleBtn}></div>
-                </div>
+            <View style={styles.container}>
+                <View style={styles.row}>
+                    <TouchableHighlight type="button" ref={green} id="green" className="btn green fade-in-out show" onPress={handleBtn}></TouchableHighlight>
+                    <TouchableHighlight type="button" ref={red} id="red" className="btn red fade-in-out show" onPress={handleBtn}></TouchableHighlight>
+                </View>
 
-                <div className="row">
-                    <div type="button" ref={yellow} id="yellow" className="btn yellow fade-in-out show" onClick={handleBtn}></div>
-                    <div type="button" ref={blue} id="blue" className="btn blue fade-in-out show" onClick={handleBtn}></div>
-                </div>
-            </div>
+                <View style={styles.row}>
+                    <TouchableHighlight type="button" ref={yellow} id="yellow" className="btn yellow fade-in-out show" onPress={handleBtn}></TouchableHighlight>
+                    <TouchableHighlight type="button" ref={blue} id="blue" className="btn blue fade-in-out show" onPress={handleBtn}></TouchableHighlight>
+                </View>
+            </View>
 
-            <div className="row">
+            <View style={styles.row}>
                 {!game.started ? (
                     <>
                         {/* Start Game */}
-                        <button className="start-button" type="button" value="Start" onClick={handleStart}>
+                        <Button sytle={styles.start_button} type="button" value="Start" onPress={handleStart}>
                             Start
-                        </button>
+                        </Button>
                     </>
                 ) : (
                     <>
                         {/* Restart Game */}
-                        <button className="start-button" type="button" value="Start" onClick={startOver}>
+                        <Button style={styles.start_button} type="button" value="Start" onPress={startOver}>
                             Restart
-                        </button>
+                        </Button>
                     </>
                 )}
-            </div>
+            </View>
         </>
     )
 }

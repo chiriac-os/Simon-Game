@@ -1,43 +1,36 @@
 // eslint-disable-next-line no-unused-vars
-import { HeaderProps, GameHeaderProps, InfoHeaderProps } from "../../@types/Props";
-import "./Header.css";
+//import { HeaderProps, GameHeaderProps, InfoHeaderProps } from "../../@types/Props";
+//import "./Header.css";
+import { View, Text } from "react-native";
+import { useCallback } from "react";
+//import styles from "./Header.module.css";
 
+const styles = {}
 /**
  * App header 
  * Displays the header of the app, with the title, the info button, level and gameover message
- * @param {HeaderProps} props 
+ * @param {*} props 
  * @returns {JSX.Element}
  */
-function Header(props) {
-    /**
-     * Props
-     */
-    const { game, setGame, getLevel } = props;
-
+function Header({ game, setGame, getLevel }) {
     /**
      * Handle show game state
      * @param {boolean} prop 
      */
-    const setShowGame = (prop) => {
-        setGame((prev) => ({
-            ...prev,
+    const setShowGame = useCallback((prop) => {
+        setGame((prevGame) => ({
+            ...prevGame,
             show: prop,
-        }))
-    }
-
-    /**
-     * Children Props
-     */
-    const gameHeaderProps = { game, setShowGame, getLevel }
-    const infoHeaderProps = { game, setShowGame }
+        }));
+    }, [game.show])
 
     return (
         <header>
             {
                 game.show ? (
-                    <GameHeader {...gameHeaderProps} />
+                    <GameHeader game={game} setShowGame={setShowGame} getLevel={getLevel} />
                 ) : (
-                    <InfoHeader {...infoHeaderProps} />
+                    <InfoHeader setShowGame={setShowGame} />
                 )
             }
         </header>
@@ -46,53 +39,43 @@ function Header(props) {
 
 /**
  * Renders the game header
- * @param {GameHeaderProps} props 
+ * @param {*} props 
  * @returns {JSX.Element}
  */
-function GameHeader(props) {
-    /**
-     * Props
-     */
-    const { game, setShowGame, getLevel } = props;
-
+function GameHeader({ game, setShowGame, getLevel }) {
     return (
         <>
-            <h1 id="level-title">{
+            <Text style={styles.level_title}>{
                 !game.over ?
                     (!game.started ? ("Press Start") : ("Level " + getLevel))
                     :
                     ("Game Over")
-            }</h1>
+            }</Text>
 
-            {game.over && 
-                <h2 id="level-subtitle">Press Start to play again</h2>
+            {game.over &&
+                <Text style={styles.level_subtitle}>Press Start to play again</Text>
             }
-
-            <div className="info" onClick={() => setShowGame(false)}>
-                <p>i</p>
-            </div>
+            <View style={styles.info} onClick={() => setShowGame(false)}>
+                <Text style={styles.info_text}>i</Text>
+            </View>
         </>
     )
 }
 
 /**
  * Renders the info header
- * @param {InfoHeaderProps} props 
+ * @param {*} props 
  * @returns {JSX.Element}
  */
-function InfoHeader(props) {
-    /**
-     * Props
-     */
-    const { setShowGame } = props;
+function InfoHeader({ setShowGame }) {
 
     return (
         <>
-            <h1 id="level-title">Never played Simon?</h1>
+            <Text style={styles.level_title}>Never played Simon?</Text>
 
-            <div className="close" onClick={() => setShowGame(true)}>
-                <p>x</p>
-            </div>
+            <View style={styles.info} onClick={() => setShowGame(true)}>
+                <Text style={styles.info_text}>x</Text>
+            </View>
         </>
     )
 }

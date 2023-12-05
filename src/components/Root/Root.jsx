@@ -1,8 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 
-import Header from "./components/Header/Header";
-import Game from "./components/Game/Game";
-import Info from "./components/Info/Info";
+import Header from "../Header/Header";
+import Game from "../Game/Game";
+import Info from "../Info/Info";
+
+import { View } from 'react-native';
 
 /**
  * Root function. This is the main component that handles the game or the info board by passing props.
@@ -30,9 +32,9 @@ function Root() {
     /**
      * Increments the level
      */
-    const nextLevel = () => {
-        setLevel((prev) => prev + 1);
-    }
+    const nextLevel = useCallback(() => {
+        setLevel((prevLevel) => prevLevel + 1);
+    }, [level])
 
     /**
      * Sets the level to 0
@@ -47,7 +49,7 @@ function Root() {
     return (
         <>
             <Header {...headerProps} />
-            <main>
+            <View>
                 {
                     game.show ? (
                         <Game {...gameProps} />
@@ -55,7 +57,7 @@ function Root() {
                         <Info />
                     )
                 }
-            </main>
+            </View>
         </>
     )
 }
