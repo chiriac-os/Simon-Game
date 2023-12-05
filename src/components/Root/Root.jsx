@@ -43,21 +43,20 @@ function Root() {
         setLevel(0);
     }
 
+
     const headerProps = { game, setGame, getLevel }
     const gameProps = { game, setGame, getLevel, nextLevel, resetLevel }
 
     return (
         <>
             <Header {...headerProps} />
-            <View>
-                {
-                    game.show ? (
-                        <Game {...gameProps} />
-                    ) : (
-                        <Info />
-                    )
-                }
-            </View>
+            {
+                game.show ? (
+                    <Game {...gameProps} />
+                ) : (
+                    <Info />
+                )
+            }
         </>
     )
 }

@@ -1,9 +1,5 @@
-// eslint-disable-next-line no-unused-vars
-//import { HeaderProps, GameHeaderProps, InfoHeaderProps } from "../../@types/Props";
-//import "./Header.css";
-import { View, Text } from "react-native";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
 import { useCallback } from "react";
-//import styles from "./Header.module.css";
 
 const styles = {}
 /**
@@ -25,15 +21,19 @@ function Header({ game, setGame, getLevel }) {
     }, [game.show])
 
     return (
-        <header>
+        <View>
             {
                 game.show ? (
-                    <GameHeader game={game} setShowGame={setShowGame} getLevel={getLevel} />
+                    <View>
+                        <GameHeader game={game} setShowGame={setShowGame} getLevel={getLevel} />
+                    </View>
                 ) : (
-                    <InfoHeader setShowGame={setShowGame} />
+                    <View>
+                        <InfoHeader setShowGame={setShowGame} />
+                    </View>
                 )
             }
-        </header>
+        </View>
     )
 }
 
@@ -55,9 +55,9 @@ function GameHeader({ game, setShowGame, getLevel }) {
             {game.over &&
                 <Text style={styles.level_subtitle}>Press Start to play again</Text>
             }
-            <View style={styles.info} onClick={() => setShowGame(false)}>
+            <TouchableWithoutFeedback style={styles.info} onPress={() => setShowGame(false)}>
                 <Text style={styles.info_text}>i</Text>
-            </View>
+            </TouchableWithoutFeedback>
         </>
     )
 }
@@ -73,9 +73,9 @@ function InfoHeader({ setShowGame }) {
         <>
             <Text style={styles.level_title}>Never played Simon?</Text>
 
-            <View style={styles.info} onClick={() => setShowGame(true)}>
+            <TouchableWithoutFeedback style={styles.info} onPress={() => setShowGame(true)}>
                 <Text style={styles.info_text}>x</Text>
-            </View>
+            </TouchableWithoutFeedback>
         </>
     )
 }

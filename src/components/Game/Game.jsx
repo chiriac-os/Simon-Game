@@ -1,4 +1,3 @@
-//import "./Game.css";
 import { useState, useRef, useCallback } from 'react';
 import { View, Button, TouchableHighlight } from 'react-native';
 const styles = {};
@@ -195,13 +194,13 @@ function Game({ game, setGame, nextLevel, resetLevel }) {
         <>
             <View style={styles.container}>
                 <View style={styles.row}>
-                    <TouchableHighlight type="button" ref={green} id="green" className="btn green fade-in-out show" onPress={handleBtn}></TouchableHighlight>
-                    <TouchableHighlight type="button" ref={red} id="red" className="btn red fade-in-out show" onPress={handleBtn}></TouchableHighlight>
+                    <Button title='' ref={green} style={[styles.btn, styles.green, styles.fade_in_out, styles.show]} onPress={handleBtn} />
+                    <Button title='' ref={red} style={[styles.btn, styles.red, styles.fade_in_out, styles.show]} onPress={handleBtn} />
                 </View>
 
                 <View style={styles.row}>
-                    <TouchableHighlight type="button" ref={yellow} id="yellow" className="btn yellow fade-in-out show" onPress={handleBtn}></TouchableHighlight>
-                    <TouchableHighlight type="button" ref={blue} id="blue" className="btn blue fade-in-out show" onPress={handleBtn}></TouchableHighlight>
+                    <Button title='' ref={yellow} style={[styles.btn, styles.yellow, styles.fade_in_out, styles.show]} onPress={handleBtn} />
+                    <Button title='' ref={blue} style={[styles.btn, styles.blue, styles.fade_in_out, styles.show]} onPress={handleBtn} />
                 </View>
             </View>
 
@@ -209,16 +208,12 @@ function Game({ game, setGame, nextLevel, resetLevel }) {
                 {!game.started ? (
                     <>
                         {/* Start Game */}
-                        <Button sytle={styles.start_button} type="button" value="Start" onPress={handleStart}>
-                            Start
-                        </Button>
+                        <Button sytle={styles.start_button} type="button" title="Start" onPress={handleStart} />
                     </>
                 ) : (
                     <>
                         {/* Restart Game */}
-                        <Button style={styles.start_button} type="button" value="Start" onPress={startOver}>
-                            Restart
-                        </Button>
+                        <Button style={styles.start_button} type="button" title="Restart" onPress={startOver} />
                     </>
                 )}
             </View>
