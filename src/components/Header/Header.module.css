@@ -1,13 +1,15 @@
+@import '../../assets/styles/press-start-2p.css';
+
 /* TITLE */
 .level_title {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     font-size: 3rem;
     margin: 5%;
     color: #FEF2BF;
 }
 
 .level_subtitle {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     font-size: 1.5rem;
     margin: 5%;
     color: #FEF2BF;
@@ -24,6 +26,7 @@
 }
 
 .info_text {
+    color: #FEF2BF;
     font-size: 2rem;
     margin: 5%;
 }
@@ -37,6 +40,7 @@
 }
 
 .close_text {
+    color: #FEF2BF;
     font-size: 3rem;
     margin: 5%;
 }

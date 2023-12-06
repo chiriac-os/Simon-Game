@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
-import { View, Button, TouchableHighlight } from 'react-native';
-const styles = {};
-
+import { View, Button } from 'react-native';
+import styles from './Game.module.css';
 /**
  * Renders the game component
  * @param {*} props
@@ -208,12 +207,12 @@ function Game({ game, setGame, nextLevel, resetLevel }) {
                 {!game.started ? (
                     <>
                         {/* Start Game */}
-                        <Button sytle={styles.start_button} type="button" title="Start" onPress={handleStart} />
+                        <Button sytle={styles.start_button} title="Start" onPress={handleStart} />
                     </>
                 ) : (
                     <>
                         {/* Restart Game */}
-                        <Button style={styles.start_button} type="button" title="Restart" onPress={startOver} />
+                        <Button style={styles.start_button} title="Restart" onPress={startOver} />
                     </>
                 )}
             </View>

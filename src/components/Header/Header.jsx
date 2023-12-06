@@ -1,7 +1,7 @@
 import { View, Text, TouchableWithoutFeedback } from "react-native";
 import { useCallback } from "react";
+import styles from './Header.module.css';
 
-const styles = {}
 /**
  * App header 
  * Displays the header of the app, with the title, the info button, level and gameover message

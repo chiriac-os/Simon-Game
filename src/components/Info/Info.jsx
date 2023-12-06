@@ -1,6 +1,6 @@
 import { View, Text, FlatList } from 'react-native';
+import styles from './Info.module.css';
 
-const styles = {}
 /**
  * Renders the info component
  * @returns {JSX.Element}

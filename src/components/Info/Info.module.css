@@ -1,22 +1,23 @@
+@import '../../assets/styles/press-start-2p.css';
+
 /* INSTRUCTIONS */
 .how_to_play_title {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     font-size: 2rem;
-    margin: 5%;
+    margin: 5% 10%;
     color: #FEF2BF;
 }
 
 .instruction_list {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1rem;
     line-height: 1.6em;
-    margin: 5%;
-    color: #FEF2BF;
-    list-style: none;
+    margin: 10%;
 }
 
 .instruction_list_item {
     margin-bottom: 25px;
+    font-family: 'Press Start 2P';
+    font-size: 1rem;
+    color: #FEF2BF;
 }
 
 /* @MEDIA */

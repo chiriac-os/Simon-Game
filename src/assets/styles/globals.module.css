@@ -1,0 +1,16 @@
+@import "./press-start-2p.css";
+
+.body {
+  text-align: center;
+  background-color: #011F3F;
+}
+
+.game_over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.text {
+  font-family: 'Press Start 2P';
+  color: #FEF2BF;
+}

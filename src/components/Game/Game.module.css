@@ -1,3 +1,5 @@
+@import '../../assets/styles/press-start-2p.css';
+
 /* BOARD */
 .game_over {
     background-color: red;
@@ -11,10 +13,6 @@
 }
 
 /* BUTTONS */
-button {
-    cursor: pointer;
-}
-
 .btn {
     margin: 25px;
     display: inline-block;
@@ -26,7 +24,7 @@ button {
 
 .start_button {
     background-color: #FEF2BF;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     font-size: 3rem;
     margin: 25px;
     display: inline-block;
